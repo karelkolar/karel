@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PROPAD — nekonečný pád</title>
+<meta name="description" content="Nekonečně padající kovová kulička skrz snímky propadlin — tělesný ekvivalent algoritmické rychlosti obrazů." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23c7cdd6'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23ffffff' opacity='0.85'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div id="vignette" aria-hidden="true"></div>
+  <div id="grain" aria-hidden="true"></div>
+
+  <div id="hud" aria-hidden="true">
+    <div class="hud-block hud-top-left">
+      <div class="hud-label">PROPAD</div>
+      <div id="depth" class="hud-value">HLOUBKA 0000000.0 m</div>
+    </div>
+    <div class="hud-block hud-top-right">
+      <div id="velocity" class="hud-value">v = 000.0 snímků/s</div>
+      <div id="frame-count" class="hud-value">SNÍMEK #0000000</div>
+    </div>
+    <div class="hud-block hud-bottom-left">
+      <div id="stream" class="hud-stream">00000000 00000000</div>
+    </div>
+    <div class="hud-block hud-bottom-right">
+      <button id="info-toggle" type="button" aria-label="Zobrazit poznámku">i</button>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <div id="overlay-inner">
+      <h1>PROPAD</h1>
+      <p class="lede">
+        Kovová kulička padá. Padá skrz řadu snímků propadlin, jeden za druhým,
+        bez konce a bez dna. Její pád je tělesný ekvivalent algoritmické
+        „rychlosti obrazů" — vertigo jako afekt datové kultury: točení hlavy
+        z toho, že obrazy proudí rychleji, než je lze číst, a prostředí kolem
+        se nepatrně proměňuje, aniž by se kamkoliv dostalo. Nekonečno tu není
+        vzdálenost, ale rychlost.
+      </p>
+      <p class="hint">Tažením myši (nebo prstu) kuličku obkroužíte ze všech stran.<br/>Kolečkem myši přiblížíte nebo oddálíte pohled.</p>
+      <button id="start-btn" type="button">Vstoupit do propadu</button>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.min.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
