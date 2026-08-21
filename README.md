@@ -17,13 +17,17 @@ nekonečno jako rychlost, ne jako vzdálenost.
 
 ## Spuštění
 
-Aplikace je čistě statická (HTML/CSS/JS modul, Three.js přes CDN), ale
-moderní prohlížeče blokují ES moduly načtené přímo z `file://`, takže je
-potřeba jednoduchý lokální server:
+Aplikace je čistě statická (HTML/CSS/JS modul, Three.js vendorováno lokálně
+v `vendor/`), ale moderní prohlížeče blokují ES moduly načtené přímo z
+`file://`, takže je potřeba jednoduchý lokální server. Repozitář obsahuje
+vlastní bezzávislostní server (`server.js`), který potřebuje jen holý Node.js
+— nic se nestahuje z npm:
 
 ```bash
 npm start
-# nebo
+# nebo přímo, pokud nemáš npm v PATH (např. stažený jen "standalone binary"):
+node server.js
+# nebo, pokud máš Python:
 python3 -m http.server 8080
 ```
 

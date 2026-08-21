@@ -4,6 +4,6 @@
   "private": true,
   "description": "Nekonečně padající kovová kulička skrz snímky propadlin — vertigo jako afekt datové kultury.",
   "scripts": {
-    "start": "npx --yes http-server -p 8080 -c-1 ."
+    "start": "node server.js"
   }
 }
