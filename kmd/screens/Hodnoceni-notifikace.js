@@ -1,16 +1,17 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Upozornění den po představení";
-export const defaults = {"accent":"#2B3BFF"};
-export const css = `body{margin:0}
+const title = "Upozornění den po představení";
+const defaults = {"accent":"#2B3BFF"};
+const css = `body{margin:0}
 a{color:#0E0E10}
 a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   renderVals() { return { accent: this.props.accent ?? '#2B3BFF' }; }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1A22; color: #FFFFFF; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 96px 12px 0">
   <span style="font-size: 17px; font-weight: 500; color: #D4D4DA">pátek 9. října</span>
   <span style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; margin-top: 4px">10:05</span>
@@ -25,3 +26,6 @@ export function view(v, h) {
   </a>
 </div>`;
 }
+
+KMD.screens["Hodnoceni-notifikace"] = { title, defaults, css, Component, view };
+})();

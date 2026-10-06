@@ -1,12 +1,13 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Scénář A – plakát s QR";
-export const defaults = {"accent":"#2B3BFF"};
-export const css = `body{margin:0}
+const title = "Scénář A – plakát s QR";
+const defaults = {"accent":"#2B3BFF"};
+const css = `body{margin:0}
 a{color:#FFFFFF}
 a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   renderVals() {
     const N = 21;
     let s = 1010;
@@ -32,7 +33,7 @@ export class Component extends Screen {
   }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: ${esc(v.accent)}; color: #FFFFFF; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; justify-content: space-between; padding: 32px 28px 36px">
   <div style="display: flex; flex-direction: column; gap: 2px">
     <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px">Klub mladých diváků</span>
@@ -56,3 +57,6 @@ export function view(v, h) {
   </a>
 </div>`;
 }
+
+KMD.screens["A0-Plakat"] = { title, defaults, css, Component, view };
+})();

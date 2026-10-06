@@ -1,4 +1,5 @@
-{
+window.KMD = window.KMD || {};
+KMD.manifest = {
   "title": "Klub mladých diváků: Young adult",
   "screens": {
     "Main": {
@@ -182,4 +183,4 @@
       "entry": "B0-Zprava"
     }
   ]
-}
+};

@@ -1,16 +1,17 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Scénář B – zpráva od kamaráda";
-export const defaults = {};
-export const css = `body{margin:0}
+const title = "Scénář B – zpráva od kamaráda";
+const defaults = {};
+const css = `body{margin:0}
 a{color:#0E0E10}
 a:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   renderVals() { return {}; }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: #1A1A22; color: #FFFFFF; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 96px 12px 0">
   <span style="font-size: 17px; font-weight: 500; color: #D4D4DA">pondělí 5. října</span>
   <span style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; margin-top: 4px">18:40</span>
@@ -27,3 +28,6 @@ export function view(v, h) {
   </a>
 </div>`;
 }
+
+KMD.screens["B0-Zprava"] = { title, defaults, css, Component, view };
+})();

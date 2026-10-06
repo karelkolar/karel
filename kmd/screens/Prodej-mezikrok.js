@@ -1,16 +1,17 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Testovací krok – web divadla";
-export const defaults = {};
-export const css = `body{margin:0}
+const title = "Testovací krok – web divadla";
+const defaults = {};
+const css = `body{margin:0}
 a{color:#0E0E10}
 a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   renderVals() { return {}; }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: #E9E9EE; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; justify-content: center; padding: 24px">
   <div style="padding: 24px; border: 2px dashed #6B6B73; border-radius: 10px; background: #FFFFFF; display: flex; flex-direction: column; gap: 16px">
     <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Testovací krok · mimo aplikaci</span>
@@ -20,3 +21,6 @@ export function view(v, h) {
   </div>
 </div>`;
 }
+
+KMD.screens["Prodej-mezikrok"] = { title, defaults, css, Component, view };
+})();

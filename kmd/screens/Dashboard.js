@@ -1,12 +1,13 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Přehled návštěvnosti klubu";
-export const defaults = {};
-export const css = `body{margin:0}
+const title = "Přehled návštěvnosti klubu";
+const defaults = {};
+const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
 button:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   constructor(props) {
     super(props);
     this.state = { hm: null, hf: null, table: false };
@@ -93,7 +94,7 @@ export class Component extends Screen {
   }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
   <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
 
@@ -389,3 +390,6 @@ export function view(v, h) {
   </div>
 </div>`;
 }
+
+KMD.screens["Dashboard"] = { title, defaults, css, Component, view };
+})();

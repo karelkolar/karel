@@ -1,6 +1,10 @@
 // Společný základ obrazovek: stav, escapování a registr událostí.
+// Klasický skript (ne ES modul), aby aplikace běžela i po dvojkliku na
+// index.html bez serveru. Vše sdílené je v globálním objektu KMD.
+window.KMD = window.KMD || {};
+KMD.screens = {};
 
-export class Screen {
+KMD.Screen = class Screen {
   constructor(props) {
     this.props = props;
     this.state = {};
@@ -14,14 +18,14 @@ export class Screen {
 
 const ESC = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 
-export function esc(value) {
+KMD.esc = function esc(value) {
   return value == null ? "" : String(value).replace(/[&<>"']/g, (c) => ESC[c]);
 }
 
 // Obsluha událostí se do HTML řetězce nedá vložit, proto se ukládá do pole
 // a do značky se píše jen její číslo: data-on-click="3". Poslouchá se až
 // na kořenovém prvku (viz app.js).
-export function createHandlers() {
+KMD.createHandlers = function createHandlers() {
   const list = [];
   return {
     list,

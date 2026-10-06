@@ -1,12 +1,13 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Registrace 2/3 – rok narození";
-export const defaults = {"accent":"#2B3BFF"};
-export const css = `body{margin:0}
+const title = "Registrace 2/3 – rok narození";
+const defaults = {"accent":"#2B3BFF"};
+const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   constructor(props) {
     super(props);
     this.state = { year: '', gender: null, psc: '' };
@@ -41,7 +42,7 @@ export class Component extends Screen {
   }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="width: 390px; min-height: 1080px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 0 8px; min-height: 64px; box-sizing: border-box">
     <a href="#/Registrace-email" aria-label="Zpět na e-mail" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
@@ -114,3 +115,6 @@ export function view(v, h) {
   </div>
 </div>`;
 }
+
+KMD.screens["Registrace-vek"] = { title, defaults, css, Component, view };
+})();

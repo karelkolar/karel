@@ -1,6 +1,6 @@
 // Router, sdílený stav členství a vykreslení obrazovek.
-import { createHandlers } from "./core.js";
 
+(function () {
 const mount = document.getElementById("app");
 const SESSION_KEY = "kmd.member";
 
@@ -13,7 +13,7 @@ const session = {
   },
 };
 
-let manifest = null;
+const manifest = KMD.manifest;
 let handlers = [];
 let seq = 0;
 
@@ -92,6 +92,19 @@ function setScreenCss(css) {
 
 // --- routování -------------------------------------------------------------
 
+// Obrazovky se načítají jako <script>, ne přes fetch/import: ty z file:// nefungují.
+function loadScreen(name) {
+  if (KMD.screens[name]) return Promise.resolve(KMD.screens[name]);
+  if (!/^[\w-]+$/.test(name)) return Promise.reject(new Error("bad name"));
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "screens/" + name + ".js";
+    s.onload = () => (KMD.screens[name] ? resolve(KMD.screens[name]) : reject(new Error("empty")));
+    s.onerror = () => reject(new Error("missing"));
+    document.head.appendChild(s);
+  });
+}
+
 function parseHash() {
   const [name, qs] = location.hash.replace(/^#\/?/, "").split("?");
   const query = {};
@@ -106,7 +119,7 @@ async function route() {
 
   let mod;
   try {
-    mod = await import("./screens/" + name + ".js");
+    mod = await loadScreen(name);
   } catch (e) {
     return showMessage("Tahle obrazovka neexistuje.");
   }
@@ -125,7 +138,7 @@ async function route() {
 
   const draw = () => {
     const keep = captureFocus();
-    const h = createHandlers();
+    const h = KMD.createHandlers();
     mount.innerHTML = mod.view(screen.renderVals(), h.attach);
     handlers = h.list;
     fitRoot(mount.firstElementChild, fill);
@@ -186,6 +199,5 @@ function showOverview() {
 // --- start -----------------------------------------------------------------
 
 window.addEventListener("hashchange", route);
-fetch("screens.json")
-  .then((r) => r.json())
-  .then((m) => { manifest = m; route(); });
+route();
+})();

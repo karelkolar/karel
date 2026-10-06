@@ -1,12 +1,13 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Datový model pro analytický útvar";
-export const defaults = {};
-export const css = `body{margin:0}
+const title = "Datový model pro analytický útvar";
+const defaults = {};
+const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
 a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   renderVals() {
     const F = (label, tag, opts) => {
       const o = opts || {};
@@ -74,7 +75,7 @@ export class Component extends Screen {
   }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
   <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
     <header style="display: flex; flex-direction: column; gap: 8px; max-width: 860px">
@@ -171,3 +172,6 @@ export function view(v, h) {
   </div>
 </div>`;
 }
+
+KMD.screens["Datovy-model"] = { title, defaults, css, Component, view };
+})();

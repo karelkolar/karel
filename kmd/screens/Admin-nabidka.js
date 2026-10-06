@@ -1,12 +1,13 @@
-import { Screen, esc } from "../core.js";
+(function () {
+const { Screen, esc } = KMD;
 
-export const title = "Kurátorská administrace – nová nabídka";
-export const defaults = {};
-export const css = `body{margin:0}
+const title = "Kurátorská administrace – nová nabídka";
+const defaults = {};
+const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-export class Component extends Screen {
+class Component extends Screen {
   constructor(props) {
     super(props);
     this.state = { count: '16' };
@@ -21,7 +22,7 @@ export class Component extends Screen {
   }
 }
 
-export function view(v, h) {
+function view(v, h) {
   return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh; display: flex; flex-wrap: wrap">
   <nav aria-label="Administrace" style="flex: 1 1 220px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; background: #0E0E10; color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
     <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Klub mladých diváků</span>
@@ -150,3 +151,6 @@ export function view(v, h) {
   </main>
 </div>`;
 }
+
+KMD.screens["Admin-nabidka"] = { title, defaults, css, Component, view };
+})();
