@@ -1,26 +1,21 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Host – doprovodná vstupenka a společný večer</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Host – doprovodná vstupenka a společný večer";
+export const defaults = {"accent":"#2B3BFF"};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="width: 390px; min-height: 1300px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
+
+export class Component extends Screen {
+  renderVals() { return { accent: this.props.accent ?? '#2B3BFF' }; }
+}
+
+export function view(v, h) {
+  return `<div style="width: 390px; min-height: 1300px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
   <header style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; min-height: 64px; box-sizing: border-box">
     <span style="display: flex; flex-direction: column; gap: 2px">
       <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Klub mladých diváků</span>
-      <span style="font-size: 14px; font-weight: 600; color: {{accent}}; text-transform: uppercase; letter-spacing: 0.08em">Young adult</span>
+      <span style="font-size: 14px; font-weight: 600; color: ${esc(v.accent)}; text-transform: uppercase; letter-spacing: 0.08em">Young adult</span>
     </span>
     <span style="font-size: 14px; font-weight: 600; color: #5A5A62">Tvoje pozvánka</span>
   </header>
@@ -78,14 +73,7 @@ a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
   <div style="margin: 32px 16px 32px; padding: 16px; border: 2px dashed #6B6B73; border-radius: 10px; display: flex; flex-direction: column; gap: 10px">
     <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Testovací krok</span>
     <span style="font-size: 15px; line-height: 1.4">Druhý den otevře stejný odkaz.</span>
-    <a href="Host-po.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border: 2px solid #0E0E10; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none">Den po představení →</a>
+    <a href="#/Host-po" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border: 2px solid #0E0E10; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none">Den po představení →</a>
   </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2B3BFF","options":["#2B3BFF","#C8321C","#0B6E4F","#0E0E10"]},"$preview":{"width":390,"height":1300}}'>
-class Component extends DCLogic {
-  renderVals() { return { accent: this.props.accent ?? '#2B3BFF' }; }
+</div>`;
 }
-</script>
-</body>
-</html>

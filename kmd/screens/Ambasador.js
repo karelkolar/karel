@@ -1,24 +1,43 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Profil ambasadora</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Profil ambasadora";
+export const defaults = {"accent":"#2B3BFF"};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="width: 390px; min-height: 2300px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
+
+export class Component extends Screen {
+  constructor(props) {
+    super(props);
+    this.state = { copied: false, text: '', sent: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const accent = this.props.accent ?? '#2B3BFF';
+    const people = [];
+    for (let i = 0; i < 19; i++) people.push({ bg: i < 7 ? '#FFFFFF' : 'rgba(255,255,255,0.25)' });
+    return {
+      accent,
+      people,
+      copyLabel: st.copied ? 'Zkopírováno' : 'Kopírovat',
+      copy: () => {
+        try { if (navigator.clipboard) navigator.clipboard.writeText('TADEAS-26').catch(() => {}); } catch (e) {}
+        this.setState({ copied: true });
+      },
+      text: st.text,
+      onText: (e) => this.setState({ text: e.target.value }),
+      left: st.text.length + ' / 400',
+      sent: st.sent,
+      notSent: !st.sent,
+      send: () => this.setState({ sent: true })
+    };
+  }
+}
+
+export function view(v, h) {
+  return `<div style="width: 390px; min-height: 2300px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
   <header style="display: flex; align-items: center; justify-content: space-between; padding: 8px; min-height: 64px; box-sizing: border-box">
-    <a href="Karta.dc.html" aria-label="Zpět" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
+    <a href="#/Karta" aria-label="Zpět" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
     </a>
     <span style="font-size: 15px; font-weight: 600; color: #5A5A62">Můj ambasadorský profil</span>
@@ -40,9 +59,9 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2
       <span style="font-size: 18px; font-weight: 600; line-height: 1.3">lidí šlo s tebou do divadla poprvé po víc než roce</span>
     </span>
     <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; width: 220px">
-      <sc-for list="{{ people }}" as="p" hint-placeholder-count="19">
-        <span style="width: 16px; height: 16px; border-radius: 8px 8px 3px 3px; background: {{ p.bg }}"></span>
-      </sc-for>
+      ${v.people.map((p) => `
+        <span style="width: 16px; height: 16px; border-radius: 8px 8px 3px 3px; background: ${esc(p.bg)}"></span>
+      `).join('')}
     </div>
     <span style="font-size: 15px; line-height: 1.45; color: #D4D4DA">Celkem jsi přivedl 19 lidí. Tohle číslo je pro nás důležitější než počet lístků – ten ani nesledujeme. Kdo je „poprvé“, uvádí každý sám u první návštěvy.</span>
   </section>
@@ -51,25 +70,25 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2
     <h2 id="kod" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Tvůj osobní kód</h2>
     <div style="display: flex; gap: 8px">
       <div style="flex-grow: 1; display: flex; align-items: center; min-height: 56px; padding: 0 16px; border: 2px dashed #0E0E10; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.06em">TADEAS-26</div>
-      <button type="button" onClick="{{ copy }}" style="min-width: 116px; min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">{{ copyLabel }}</button>
+      <button type="button" ${h('click', v.copy)} style="min-width: 116px; min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">${esc(v.copyLabel)}</button>
     </div>
     <span style="font-size: 14px; line-height: 1.4; color: #5A5A62">Kdo se přes něj přidá nebo přijde jako doprovod, započítá se ti.</span>
   </section>
 
-  <section aria-labelledby="ukol" style="margin: 28px 16px 0; padding: 20px; border-radius: 8px; border: 2px solid {{accent}}; display: flex; flex-direction: column; gap: 12px">
+  <section aria-labelledby="ukol" style="margin: 28px 16px 0; padding: 20px; border-radius: 8px; border: 2px solid ${esc(v.accent)}; display: flex; flex-direction: column; gap: 12px">
     <span style="display: flex; justify-content: space-between; align-items: center">
-      <h2 id="ukol" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: {{accent}}">Výzva na říjen</h2>
+      <h2 id="ukol" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: ${esc(v.accent)}">Výzva na říjen</h2>
       <span style="font-size: 14px; color: #5A5A62">do 31. 10.</span>
     </span>
     <span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.2">Přiveď 2 lidi, kteří letos v divadle nebyli</span>
     <span style="display: flex; align-items: center; gap: 12px">
       <span aria-hidden="true" style="flex-grow: 1; height: 8px; border-radius: 4px; background: #E2E2E6; overflow: hidden; display: block">
-        <span style="display: block; width: 50%; height: 8px; background: {{accent}}"></span>
+        <span style="display: block; width: 50%; height: 8px; background: ${esc(v.accent)}"></span>
       </span>
       <span style="font-size: 15px; font-weight: 600">1 ze 2</span>
     </span>
     <span style="font-size: 14px; color: #3A3A42">Odměna: 2 vstupenky navíc · Bára jde 17. 10. poprvé</span>
-    <a href="Pozvat.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #0E0E10; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; color: #FFFFFF">Pozvat někoho</a>
+    <a href="#/Pozvat" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #0E0E10; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none; color: #FFFFFF">Pozvat někoho</a>
   </section>
 
   <section aria-labelledby="odmeny" style="display: flex; flex-direction: column; padding: 32px 20px 0">
@@ -97,7 +116,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2
         <span style="font-size: 14px; color: #3A3A42">Pro školu nebo životopis, vydáme po 30 hodinách</span>
         <span style="display: flex; align-items: center; gap: 10px">
           <span aria-hidden="true" style="flex-grow: 1; height: 6px; border-radius: 3px; background: #E2E2E6; overflow: hidden; display: block">
-            <span style="display: block; width: 60%; height: 6px; background: {{accent}}"></span>
+            <span style="display: block; width: 60%; height: 6px; background: ${esc(v.accent)}"></span>
           </span>
           <span style="font-size: 14px; font-weight: 600; white-space: nowrap">18 / 30 h</span>
         </span>
@@ -112,7 +131,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2
         <span style="font-size: 16px; font-weight: 600">Všichni moji bývalí</span>
         <span style="font-size: 14px; color: #3A3A42">Zveřejněno ve výběru</span>
       </span>
-      <a href="Detail.dc.html" style="font-size: 15px; font-weight: 600; min-height: 44px; display: flex; align-items: center; text-underline-offset: 4px">Zobrazit</a>
+      <a href="#/Detail" style="font-size: 15px; font-weight: 600; min-height: 44px; display: flex; align-items: center; text-underline-offset: 4px">Zobrazit</a>
     </div>
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 8px; background: #F3F3F5">
       <span style="display: flex; flex-direction: column; gap: 2px">
@@ -129,50 +148,19 @@ a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #2
         <option>Lehkost – Divadlo pod Palmovkou</option>
       </select>
       <label for="text" style="font-size: 15px; font-weight: 600; padding-top: 8px">Proč jít <span style="font-weight: 400; color: #5A5A62">(3–4 věty, po svém)</span></label>
-      <textarea id="text" rows="5" maxlength="400" value="{{ text }}" onChange="{{ onText }}" placeholder="Pro koho to je, co si z toho odneseš, na co se připravit…" style="box-sizing: border-box; padding: 12px 16px; font-size: 17px; line-height: 1.45; font-family: inherit; color: #0E0E10; border: 2px solid #0E0E10; border-radius: 6px; background: #FFFFFF; resize: none"></textarea>
-      <span style="font-size: 14px; color: #5A5A62; text-align: right">{{ left }}</span>
-      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-        <button type="button" onClick="{{ send }}" style="min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 17px; font-weight: 600; cursor: pointer">Poslat kurátorům</button>
+      <textarea id="text" rows="5" maxlength="400" ${h('change', v.onText)} placeholder="Pro koho to je, co si z toho odneseš, na co se připravit…" style="box-sizing: border-box; padding: 12px 16px; font-size: 17px; line-height: 1.45; font-family: inherit; color: #0E0E10; border: 2px solid #0E0E10; border-radius: 6px; background: #FFFFFF; resize: none">${esc(v.text)}</textarea>
+      <span style="font-size: 14px; color: #5A5A62; text-align: right">${esc(v.left)}</span>
+      ${v.notSent ? `
+        <button type="button" ${h('click', v.send)} style="min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 17px; font-weight: 600; cursor: pointer">Poslat kurátorům</button>
         <span style="font-size: 14px; line-height: 1.4; color: #5A5A62">Než se text objeví ve výběru, přečte si ho kurátorka. Opravuje jen překlepy.</span>
-      </sc-if>
-      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      ` : ''}
+      ${v.sent ? `
         <div style="display: flex; gap: 10px; align-items: center; padding: 14px 16px; border-radius: 6px; background: #E7F5EE; color: #0B4D37; font-size: 15px; font-weight: 600">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
           <span>Posláno. Dáme vědět, až bude venku.</span>
         </div>
-      </sc-if>
+      ` : ''}
     </div>
   </section>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2B3BFF","options":["#2B3BFF","#C8321C","#0B6E4F","#0E0E10"]},"$preview":{"width":390,"height":2300}}'>
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.state = { copied: false, text: '', sent: false };
-  }
-  renderVals() {
-    const st = this.state;
-    const accent = this.props.accent ?? '#2B3BFF';
-    const people = [];
-    for (let i = 0; i < 19; i++) people.push({ bg: i < 7 ? '#FFFFFF' : 'rgba(255,255,255,0.25)' });
-    return {
-      accent,
-      people,
-      copyLabel: st.copied ? 'Zkopírováno' : 'Kopírovat',
-      copy: () => {
-        try { if (navigator.clipboard) navigator.clipboard.writeText('TADEAS-26').catch(() => {}); } catch (e) {}
-        this.setState({ copied: true });
-      },
-      text: st.text,
-      onText: (e) => this.setState({ text: e.target.value }),
-      left: st.text.length + ' / 400',
-      sent: st.sent,
-      notSent: !st.sent,
-      send: () => this.setState({ sent: true })
-    };
-  }
+</div>`;
 }
-</script>
-</body>
-</html>

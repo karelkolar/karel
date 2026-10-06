@@ -1,22 +1,19 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Přechod do prodeje divadla</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Přechod do prodeje divadla";
+export const defaults = {};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; position: relative; overflow: hidden">
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
+
+export class Component extends Screen {
+  renderVals() {
+    return {};
+  }
+}
+
+export function view(v, h) {
+  return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; position: relative; overflow: hidden">
   <div aria-hidden="true" style="padding: 72px 16px 0; display: flex; flex-direction: column; gap: 16px">
     <div style="height: 220px; border-radius: 8px; background: #E9E9EE"></div>
     <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; line-height: 1.05; padding: 0 4px">Všichni moji bývalí</div>
@@ -49,21 +46,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3B
     </ol>
 
     <div style="display: flex; flex-direction: column; gap: 10px">
-      <a href="Prodej-mezikrok.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; background: #0E0E10; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; color: #FFFFFF">
+      <a href="#/Prodej-mezikrok" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; background: #0E0E10; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; color: #FFFFFF">
         <span>Pokračovat na web divadla</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
       </a>
-      <a href="Detail.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 48px; font-size: 16px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px">Zůstat v klubu</a>
+      <a href="#/Detail" style="display: flex; align-items: center; justify-content: center; min-height: 48px; font-size: 16px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px">Zůstat v klubu</a>
     </div>
   </section>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
-class Component extends DCLogic {
-  renderVals() {
-    return {};
-  }
+</div>`;
 }
-</script>
-</body>
-</html>

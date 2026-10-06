@@ -1,119 +1,12 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Datový model pro analytický útvar</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Datový model pro analytický útvar";
+export const defaults = {};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
-  <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
-    <header style="display: flex; flex-direction: column; gap: 8px; max-width: 860px">
-      <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2B3BFF">Klub mladých diváků · data pro město</span>
-      <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Co předáváme analytickému útvaru odboru kultury</h1>
-      <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #3A3A42">Šest evidencí. Osobní údaje jsou jen v evidenci uživatelů a transakcí, a i tam pod číselným ID – bez jména, e-mailu a přesné adresy.</p>
-    </header>
+a:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-    <section aria-labelledby="tok" style="display: flex; flex-direction: column; gap: 14px">
-      <h2 id="tok" style="margin: 0; font-size: 20px; font-weight: 600">Odkud data tečou</h2>
-      <div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px">
-        <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px">
-          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Aplikace</strong><br><span style="font-size: 14px; color: #3A3A42">registrace, zdroj návštěvy</span></div>
-          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Kurátoři</strong><br><span style="font-size: 14px; color: #3A3A42">nabídky, místa, organizace</span></div>
-          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Prodej divadel</strong><br><span style="font-size: 14px; color: #3A3A42">vstupenky a transakce podle klubového kódu</span></div>
-        </div>
-        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
-        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #0E0E10; color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; gap: 6px">
-          <strong style="font-size: 16px">Evidence KMD</strong>
-          <span style="font-size: 14px; color: #D4D4DA">Provozovatel drží i e-mail a párovací klíč kód ↔ ID. Ten nikdy neodchází.</span>
-        </div>
-        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
-        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #FFFFFF; border: 2px solid #2B3BFF; display: flex; flex-direction: column; justify-content: center; gap: 6px">
-          <strong style="font-size: 16px">Export</strong>
-          <span style="font-size: 14px; color: #3A3A42">Pseudonymizovaná data, měsíčně</span>
-        </div>
-        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
-        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; justify-content: center; gap: 6px">
-          <strong style="font-size: 16px">Analytický útvar</strong>
-          <span style="font-size: 14px; color: #3A3A42">sestavy jen se skupinami od 10 lidí</span>
-        </div>
-      </div>
-    </section>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px">
-      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; background: #0E0E10; color: #FFFFFF; font-weight: 600">min</span> navrhované minimum</span>
-      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; border: 1px solid #0E0E10; font-weight: 600">navíc</span> nice to have</span>
-      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; background: #FFF0B8; color: #5C4600; font-weight: 600">osobní</span> osobní údaj pod pseudonymem</span>
-    </div>
-
-    <section aria-label="Evidence" style="display: flex; flex-wrap: wrap; gap: 16px">
-      <sc-for list="{{ entities }}" as="e" hint-placeholder-count="6">
-        <article style="flex: 1 1 380px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
-          <div style="display: flex; flex-direction: column; gap: 4px">
-            <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">{{ e.name }}</h2>
-            <span style="font-size: 14px; color: #5A5A62">Zdroj: {{ e.source }}</span>
-          </div>
-          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
-            <sc-for list="{{ e.fields }}" as="f" hint-placeholder-count="5">
-              <li style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
-                <span style="flex: 1 1 180px; font-size: 15px; font-weight: 500">{{ f.label }}</span>
-                <span style="display: flex; gap: 6px">
-                  <span style="padding: 2px 8px; border-radius: 999px; font-size: 14px; font-weight: 600; background: {{ f.tagBg }}; color: {{ f.tagFg }}; border: {{ f.tagBorder }}">{{ f.tag }}</span>
-                  <sc-if value="{{ f.personal }}" hint-placeholder-val="{{ false }}">
-                    <span style="padding: 2px 8px; border-radius: 999px; font-size: 14px; font-weight: 600; background: #FFF0B8; color: #5C4600">osobní</span>
-                  </sc-if>
-                </span>
-                <sc-if value="{{ f.hasNote }}" hint-placeholder-val="{{ false }}">
-                  <span style="flex: 1 1 100%; font-size: 14px; line-height: 1.4; color: #3A3A42">{{ f.note }}</span>
-                </sc-if>
-              </li>
-            </sc-for>
-          </ul>
-          <sc-if value="{{ e.hasFoot }}" hint-placeholder-val="{{ false }}">
-            <span style="font-size: 14px; line-height: 1.45; color: #3A3A42; padding: 10px 12px; border-radius: 6px; background: #F3F3F5">{{ e.foot }}</span>
-          </sc-if>
-        </article>
-      </sc-for>
-    </section>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 16px">
-      <section aria-labelledby="pravidla" style="flex: 1 1 420px; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-        <h2 id="pravidla" style="margin: 0; font-size: 20px; font-weight: 600">Pravidla předávání</h2>
-        <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5">
-          <li>ID uživatele je náhodné číslo. Spojit ho s e-mailem umí jen provozovatel klubu.</li>
-          <li>Místo PSČ ukládáme jen základní územní jednotku (městská část / obec). PSČ se po převodu zahazuje.</li>
-          <li>Místo data narození jen rok. Pohlaví a bydliště jsou nepovinné.</li>
-          <li>V sestavách se nezobrazují skupiny menší než 10 lidí.</li>
-          <li>Data slouží jen ke statistice, nespojují se s jinými evidencemi o lidech.</li>
-          <li>Doba uchování: [doplnit po konzultaci s pověřencem pro ochranu osobních údajů].</li>
-        </ul>
-      </section>
-      <section aria-labelledby="nesbirame" style="flex: 1 1 420px; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-        <h2 id="nesbirame" style="margin: 0; font-size: 20px; font-weight: 600">Co do exportu nejde</h2>
-        <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5">
-          <li>E-mail, jméno, telefon, přesná adresa – aplikace jméno, telefon ani adresu vůbec nesbírá.</li>
-          <li>Přezdívky z pozvánek a jména v partách.</li>
-          <li>Texty hodnocení s vazbou na člověka (do exportu jen souhrnné % doporučení).</li>
-          <li>Odpovědi z ankety o studiu a „poprvé“ – jsou anonymní a k ID se nevážou, předávají se jen jako souhrn.</li>
-          <li>Poloha zařízení, historie prohlížení, reklamní identifikátory.</li>
-        </ul>
-      </section>
-    </div>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2280}}'>
-class Component extends DCLogic {
+export class Component extends Screen {
   renderVals() {
     const F = (label, tag, opts) => {
       const o = opts || {};
@@ -180,6 +73,101 @@ class Component extends DCLogic {
     return { entities };
   }
 }
-</script>
-</body>
-</html>
+
+export function view(v, h) {
+  return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+    <header style="display: flex; flex-direction: column; gap: 8px; max-width: 860px">
+      <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2B3BFF">Klub mladých diváků · data pro město</span>
+      <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Co předáváme analytickému útvaru odboru kultury</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #3A3A42">Šest evidencí. Osobní údaje jsou jen v evidenci uživatelů a transakcí, a i tam pod číselným ID – bez jména, e-mailu a přesné adresy.</p>
+    </header>
+
+    <section aria-labelledby="tok" style="display: flex; flex-direction: column; gap: 14px">
+      <h2 id="tok" style="margin: 0; font-size: 20px; font-weight: 600">Odkud data tečou</h2>
+      <div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px">
+        <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px">
+          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Aplikace</strong><br><span style="font-size: 14px; color: #3A3A42">registrace, zdroj návštěvy</span></div>
+          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Kurátoři</strong><br><span style="font-size: 14px; color: #3A3A42">nabídky, místa, organizace</span></div>
+          <div style="padding: 14px 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6"><strong style="font-size: 15px">Prodej divadel</strong><br><span style="font-size: 14px; color: #3A3A42">vstupenky a transakce podle klubového kódu</span></div>
+        </div>
+        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
+        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #0E0E10; color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+          <strong style="font-size: 16px">Evidence KMD</strong>
+          <span style="font-size: 14px; color: #D4D4DA">Provozovatel drží i e-mail a párovací klíč kód ↔ ID. Ten nikdy neodchází.</span>
+        </div>
+        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
+        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #FFFFFF; border: 2px solid #2B3BFF; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+          <strong style="font-size: 16px">Export</strong>
+          <span style="font-size: 14px; color: #3A3A42">Pseudonymizovaná data, měsíčně</span>
+        </div>
+        <div aria-hidden="true" style="flex: 0 0 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #5A5A62">→</div>
+        <div style="flex: 1 1 200px; padding: 16px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+          <strong style="font-size: 16px">Analytický útvar</strong>
+          <span style="font-size: 14px; color: #3A3A42">sestavy jen se skupinami od 10 lidí</span>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px">
+      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; background: #0E0E10; color: #FFFFFF; font-weight: 600">min</span> navrhované minimum</span>
+      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; border: 1px solid #0E0E10; font-weight: 600">navíc</span> nice to have</span>
+      <span style="display: flex; align-items: center; gap: 8px"><span style="padding: 2px 8px; border-radius: 999px; background: #FFF0B8; color: #5C4600; font-weight: 600">osobní</span> osobní údaj pod pseudonymem</span>
+    </div>
+
+    <section aria-label="Evidence" style="display: flex; flex-wrap: wrap; gap: 16px">
+      ${v.entities.map((e) => `
+        <article style="flex: 1 1 380px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">${esc(e.name)}</h2>
+            <span style="font-size: 14px; color: #5A5A62">Zdroj: ${esc(e.source)}</span>
+          </div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+            ${e.fields.map((f) => `
+              <li style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
+                <span style="flex: 1 1 180px; font-size: 15px; font-weight: 500">${esc(f.label)}</span>
+                <span style="display: flex; gap: 6px">
+                  <span style="padding: 2px 8px; border-radius: 999px; font-size: 14px; font-weight: 600; background: ${esc(f.tagBg)}; color: ${esc(f.tagFg)}; border: ${esc(f.tagBorder)}">${esc(f.tag)}</span>
+                  ${f.personal ? `
+                    <span style="padding: 2px 8px; border-radius: 999px; font-size: 14px; font-weight: 600; background: #FFF0B8; color: #5C4600">osobní</span>
+                  ` : ''}
+                </span>
+                ${f.hasNote ? `
+                  <span style="flex: 1 1 100%; font-size: 14px; line-height: 1.4; color: #3A3A42">${esc(f.note)}</span>
+                ` : ''}
+              </li>
+            `).join('')}
+          </ul>
+          ${e.hasFoot ? `
+            <span style="font-size: 14px; line-height: 1.45; color: #3A3A42; padding: 10px 12px; border-radius: 6px; background: #F3F3F5">${esc(e.foot)}</span>
+          ` : ''}
+        </article>
+      `).join('')}
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section aria-labelledby="pravidla" style="flex: 1 1 420px; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+        <h2 id="pravidla" style="margin: 0; font-size: 20px; font-weight: 600">Pravidla předávání</h2>
+        <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5">
+          <li>ID uživatele je náhodné číslo. Spojit ho s e-mailem umí jen provozovatel klubu.</li>
+          <li>Místo PSČ ukládáme jen základní územní jednotku (městská část / obec). PSČ se po převodu zahazuje.</li>
+          <li>Místo data narození jen rok. Pohlaví a bydliště jsou nepovinné.</li>
+          <li>V sestavách se nezobrazují skupiny menší než 10 lidí.</li>
+          <li>Data slouží jen ke statistice, nespojují se s jinými evidencemi o lidech.</li>
+          <li>Doba uchování: [doplnit po konzultaci s pověřencem pro ochranu osobních údajů].</li>
+        </ul>
+      </section>
+      <section aria-labelledby="nesbirame" style="flex: 1 1 420px; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+        <h2 id="nesbirame" style="margin: 0; font-size: 20px; font-weight: 600">Co do exportu nejde</h2>
+        <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5">
+          <li>E-mail, jméno, telefon, přesná adresa – aplikace jméno, telefon ani adresu vůbec nesbírá.</li>
+          <li>Přezdívky z pozvánek a jména v partách.</li>
+          <li>Texty hodnocení s vazbou na člověka (do exportu jen souhrnné % doporučení).</li>
+          <li>Odpovědi z ankety o studiu a „poprvé“ – jsou anonymní a k ID se nevážou, předávají se jen jako souhrn.</li>
+          <li>Poloha zařízení, historie prohlížení, reklamní identifikátory.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>`;
+}

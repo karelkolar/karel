@@ -1,318 +1,12 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Přehled návštěvnosti klubu</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Přehled návštěvnosti klubu";
+export const defaults = {};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-button:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
-  <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+button:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-      <div style="display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2B3BFF">Klub mladých diváků: Young adult</span>
-        <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Přehled návštěvnosti</h1>
-        <span style="font-size: 15px; color: #5A5A62">Pilot duben–září 2026 · aktualizováno 1. 10. 2026 · ilustrativní čísla pro prototyp</span>
-      </div>
-      <div style="display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6; font-size: 14px; line-height: 1.4; max-width: 380px">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path></svg>
-        <span>Data bez jmen a e-mailů, lidé jen pod číselným označením. Skupiny menší než 10 lidí nezobrazujeme.</span>
-      </div>
-    </header>
-
-    <section aria-label="Klíčová čísla" style="display: flex; flex-wrap: wrap; gap: 16px">
-      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 15px; color: #5A5A62">Návštěvy přes klub</span>
-        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">436</span>
-        <span style="font-size: 14px; color: #5A5A62">za 6 měsíců, 6 scén</span>
-      </div>
-      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 15px; color: #5A5A62">Noví v klubu</span>
-        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">54 %</span>
-        <span style="font-size: 14px; color: #5A5A62">235 návštěv bylo prvních</span>
-      </div>
-      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 15px; color: #5A5A62">Návštěv na člena</span>
-        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">2,1</span>
-        <span style="font-size: 14px; color: #5A5A62">průměr, 212 členů s návštěvou</span>
-      </div>
-      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
-        <span style="font-size: 15px; color: #5A5A62">Mimo vysoké školy</span>
-        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">48 %</span>
-        <span style="font-size: 14px; color: #5A5A62">z ankety po představení, n = 184</span>
-      </div>
-    </section>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 16px">
-      <section aria-labelledby="h-mesice" style="flex: 2 1 560px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px">
-          <div style="display: flex; flex-direction: column; gap: 4px">
-            <h2 id="h-mesice" style="margin: 0; font-size: 18px; font-weight: 600">Noví a stávající návštěvníci po měsících</h2>
-            <span style="font-size: 14px; color: #5A5A62">Počet návštěv. „Nový“ = první návštěva s klubem.</span>
-          </div>
-          <button type="button" onClick="{{ toggleTable }}" aria-pressed="{{ tablePressed }}" style="min-height: 44px; padding: 0 14px; border-radius: 6px; border: 1.5px solid #0E0E10; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #0E0E10; cursor: pointer">{{ tableLabel }}</button>
-        </div>
-        <div style="display: flex; gap: 20px; font-size: 14px">
-          <span style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #2a78d6"></span>Noví</span>
-          <span style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #eb6834"></span>Stávající</span>
-        </div>
-
-        <sc-if value="{{ showChart }}" hint-placeholder-val="{{ true }}">
-          <div aria-live="polite" style="min-height: 22px; font-size: 15px; font-weight: 500">{{ monthReadout }}</div>
-          <div style="position: relative; height: 240px; display: flex; align-items: flex-end; gap: 16px; padding: 0 4px; border-bottom: 1px solid #C9C9CF">
-            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 100px; border-top: 1px solid #EEEEF1"></div>
-            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 200px; border-top: 1px solid #EEEEF1"></div>
-            <span aria-hidden="true" style="position: absolute; right: 0; bottom: 204px; font-size: 14px; color: #5A5A62">130</span>
-            <span aria-hidden="true" style="position: absolute; right: 0; bottom: 104px; font-size: 14px; color: #5A5A62">65</span>
-            <sc-for list="{{ months }}" as="m" hint-placeholder-count="6">
-              <button type="button" aria-label="{{ m.aria }}" onMouseEnter="{{ m.enter }}" onFocus="{{ m.enter }}" onMouseLeave="{{ leaveMonth }}" style="position: relative; flex: 1; height: 100%; max-width: 88px; padding: 0; border: 0; background: {{ m.hoverBg }}; border-radius: 6px 6px 0 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: 2px; cursor: default; font-family: inherit">
-                <span style="font-size: 14px; color: #3A3A42; text-align: center; padding-bottom: 4px">{{ m.total }}</span>
-                <span style="display: block; height: {{ m.sh }}; background: #eb6834; border-radius: 4px 4px 0 0"></span>
-                <span style="display: block; height: {{ m.nh }}; background: #2a78d6"></span>
-              </button>
-            </sc-for>
-          </div>
-          <div style="display: flex; gap: 16px; padding: 0 4px">
-            <sc-for list="{{ months }}" as="m" hint-placeholder-count="6">
-              <span style="flex: 1; max-width: 88px; text-align: center; font-size: 14px; color: #5A5A62">{{ m.short }}</span>
-            </sc-for>
-          </div>
-        </sc-if>
-        <sc-if value="{{ showTable }}" hint-placeholder-val="{{ false }}">
-          <table style="width: 100%; border-collapse: collapse; font-size: 15px">
-            <thead>
-              <tr>
-                <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Měsíc</th>
-                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Noví</th>
-                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Stávající</th>
-                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Celkem</th>
-              </tr>
-            </thead>
-            <tbody>
-              <sc-for list="{{ months }}" as="m" hint-placeholder-count="6">
-                <tr>
-                  <th scope="row" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 500">{{ m.full }}</th>
-                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1">{{ m.n }}</td>
-                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1">{{ m.s }}</td>
-                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 600">{{ m.total }}</td>
-                </tr>
-              </sc-for>
-            </tbody>
-          </table>
-        </sc-if>
-      </section>
-
-      <section aria-labelledby="h-frekvence" style="flex: 1 1 320px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
-        <div style="display: flex; flex-direction: column; gap: 4px">
-          <h2 id="h-frekvence" style="margin: 0; font-size: 18px; font-weight: 600">Kolikrát člen přišel</h2>
-          <span style="font-size: 14px; color: #5A5A62">Počet členů podle počtu návštěv, n = 212</span>
-        </div>
-        <div aria-live="polite" style="min-height: 22px; font-size: 15px; font-weight: 500">{{ freqReadout }}</div>
-        <div style="height: 240px; display: flex; align-items: flex-end; gap: 12px; border-bottom: 1px solid #C9C9CF">
-          <sc-for list="{{ freq }}" as="f" hint-placeholder-count="4">
-            <button type="button" aria-label="{{ f.aria }}" onMouseEnter="{{ f.enter }}" onFocus="{{ f.enter }}" onMouseLeave="{{ leaveFreq }}" style="flex: 1; height: 100%; padding: 0; border: 0; background: {{ f.hoverBg }}; border-radius: 6px 6px 0 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; cursor: default; font-family: inherit">
-              <span style="font-size: 14px; color: #3A3A42; text-align: center">{{ f.n }}</span>
-              <span style="display: block; height: {{ f.h }}; background: #2a78d6; border-radius: 4px 4px 0 0"></span>
-            </button>
-          </sc-for>
-        </div>
-        <div style="display: flex; gap: 12px">
-          <sc-for list="{{ freq }}" as="f" hint-placeholder-count="4">
-            <span style="flex: 1; text-align: center; font-size: 14px; color: #5A5A62">{{ f.label }}</span>
-          </sc-for>
-        </div>
-      </section>
-    </div>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 16px">
-      <section aria-labelledby="h-kanaly" style="flex: 3 1 480px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
-        <div style="display: flex; flex-direction: column; gap: 4px">
-          <h2 id="h-kanaly" style="margin: 0; font-size: 18px; font-weight: 600">Odkud lidé přišli</h2>
-          <span style="font-size: 14px; color: #5A5A62">Podle odkazu nebo kódu při první návštěvě, n = 268 nových</span>
-        </div>
-        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
-          <sc-for list="{{ channels }}" as="c" hint-placeholder-count="6">
-            <li style="display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) 48px; align-items: center; gap: 12px; min-height: 36px">
-              <span style="font-size: 15px">{{ c.label }}</span>
-              <span aria-hidden="true" style="display: block; height: 18px; background: #F0F0F3; border-radius: 0 4px 4px 0">
-                <span style="display: block; height: 18px; width: {{ c.w }}; background: #2a78d6; border-radius: 0 4px 4px 0"></span>
-              </span>
-              <span style="font-size: 15px; font-weight: 600; text-align: right">{{ c.pct }} %</span>
-            </li>
-          </sc-for>
-        </ul>
-        <span style="font-size: 14px; line-height: 1.4; color: #5A5A62">Pozvánka od kamaráda a osobní kód ambasadora dohromady přivedly víc než polovinu nových lidí.</span>
-      </section>
-
-      <section aria-labelledby="h-studium" style="flex: 2 1 360px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
-        <div style="display: flex; flex-direction: column; gap: 4px">
-          <h2 id="h-studium" style="margin: 0; font-size: 18px; font-weight: 600">Kdo chodí: studium</h2>
-          <span style="font-size: 14px; color: #5A5A62">Nepovinná anonymní otázka po představení, n = 184</span>
-        </div>
-        <div aria-hidden="true" style="display: flex; gap: 2px; height: 28px">
-          <span style="width: 52%; background: #2a78d6; border-radius: 4px 0 0 4px"></span>
-          <span style="width: 33%; background: #eb6834"></span>
-          <span style="width: 15%; background: #1baf7a; border-radius: 0 4px 4px 0"></span>
-        </div>
-        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
-          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
-            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #2a78d6; flex-shrink: 0"></span>
-            <span style="flex-grow: 1; font-size: 15px">Studuje vysokou školu</span>
-            <span style="font-size: 15px; font-weight: 600">52 %</span>
-          </li>
-          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
-            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #eb6834; flex-shrink: 0"></span>
-            <span style="flex-grow: 1; font-size: 15px">Nestuduje (pracuje, jiné)</span>
-            <span style="font-size: 15px; font-weight: 600">33 %</span>
-          </li>
-          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0">
-            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #1baf7a; flex-shrink: 0"></span>
-            <span style="flex-grow: 1; font-size: 15px">Jiné studium (VOŠ, kurzy)</span>
-            <span style="font-size: 15px; font-weight: 600">15 %</span>
-          </li>
-        </ul>
-        <span style="font-size: 15px; font-weight: 600">Mimo vysoké školy celkem: 48 %</span>
-      </section>
-    </div>
-
-    <section aria-labelledby="h-vstupenky" style="display: flex; flex-direction: column; gap: 12px">
-      <h2 id="h-vstupenky" style="margin: 8px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">Vstupenky a kontingent</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 16px">
-        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-          <span style="font-size: 15px; color: #5A5A62">Využití kontingentu</span>
-          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">71 %</span>
-          <span aria-hidden="true" style="display: block; height: 10px; border-radius: 0 4px 4px 0; background: #F0F0F3"><span style="display: block; width: 71%; height: 10px; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
-          <span style="font-size: 14px; color: #5A5A62">436 prodaných z 612 uvolněných do KMD</span>
-        </div>
-        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-          <span style="font-size: 15px; color: #5A5A62">Zrušené a vrácené</span>
-          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">18</span>
-          <span style="font-size: 14px; color: #5A5A62">4 % prodaných · 11 zrušeno, 7 s vrácením peněz</span>
-        </div>
-        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-          <span style="font-size: 15px; color: #5A5A62">Sleva oproti plné ceně</span>
-          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">268 Kč</span>
-          <span style="font-size: 14px; color: #5A5A62">průměrně na vstupenku · plná 418 Kč, KMD 150 Kč</span>
-        </div>
-        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
-          <span style="font-size: 15px; color: #5A5A62">Nákupy podle zařízení</span>
-          <span style="display: flex; gap: 2px; height: 24px; margin-top: 6px" aria-hidden="true">
-            <span style="width: 62%; background: #2a78d6; border-radius: 4px 0 0 4px"></span>
-            <span style="width: 38%; background: #eb6834; border-radius: 0 4px 4px 0"></span>
-          </span>
-          <span style="display: flex; gap: 16px; font-size: 14px">
-            <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #2a78d6"></span>Mobil 62 %</span>
-            <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #eb6834"></span>Web 38 %</span>
-          </span>
-          <span style="font-size: 14px; color: #5A5A62">hlásí divadla, která to umí (4 ze 6)</span>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="h-kdo" style="display: flex; flex-direction: column; gap: 12px">
-      <h2 id="h-kdo" style="margin: 8px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">Kdo jsou členové</h2>
-      <span style="font-size: 14px; color: #5A5A62">268 registrovaných · pohlaví a bydliště jsou nepovinné, proto i kategorie „neuvedeno“</span>
-      <div style="display: flex; flex-wrap: wrap; gap: 16px">
-        <div style="flex: 1 1 300px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
-          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Věk</h3>
-          <sc-for list="{{ ages }}" as="a" hint-placeholder-count="4">
-            <div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) 44px; gap: 10px; align-items: center">
-              <span style="font-size: 15px">{{ a.label }}</span>
-              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: {{ a.w }}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
-              <span style="font-size: 15px; font-weight: 600; text-align: right">{{ a.pct }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <div style="flex: 1 1 300px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
-          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Pohlaví</h3>
-          <sc-for list="{{ genders }}" as="g" hint-placeholder-count="4">
-            <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) 80px; gap: 10px; align-items: center">
-              <span style="font-size: 15px">{{ g.label }}</span>
-              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: {{ g.w }}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
-              <span style="font-size: 15px; font-weight: 600; text-align: right; color: {{ g.color }}">{{ g.pct }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <div style="flex: 1 1 340px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
-          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Bydliště <span style="font-weight: 400; font-size: 14px; color: #5A5A62">(městská část / obec, ZÚJ)</span></h3>
-          <sc-for list="{{ areas }}" as="r" hint-placeholder-count="8">
-            <div style="display: grid; grid-template-columns: 110px minmax(0, 1fr) 44px; gap: 10px; align-items: center">
-              <span style="font-size: 15px">{{ r.label }}</span>
-              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: {{ r.w }}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
-              <span style="font-size: 15px; font-weight: 600; text-align: right">{{ r.pct }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="h-sceny" style="padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
-      <div style="display: flex; flex-direction: column; gap: 4px">
-        <h2 id="h-sceny" style="margin: 0; font-size: 18px; font-weight: 600">Po scénách</h2>
-        <span style="font-size: 14px; color: #5A5A62">Seřazeno podle počtu návštěv · ilustrativní čísla, ne skutečné výsledky divadel</span>
-      </div>
-      <div style="overflow-x: auto">
-        <table style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 15px">
-          <thead>
-            <tr>
-              <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Scéna</th>
-              <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Návštěvy</th>
-              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Využití kontingentu</th>
-              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Z toho noví</th>
-              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Doporučuje</th>
-              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Společné večery</th>
-            </tr>
-          </thead>
-          <tbody>
-            <sc-for list="{{ scenes }}" as="s" hint-placeholder-count="6">
-              <tr>
-                <th scope="row" style="text-align: left; padding: 12px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 500">{{ s.name }}</th>
-                <td style="padding: 12px 8px; border-bottom: 1px solid #EEEEF1">
-                  <span style="display: flex; align-items: center; gap: 10px">
-                    <span aria-hidden="true" style="display: block; width: 180px; height: 12px; background: #F0F0F3; border-radius: 0 4px 4px 0">
-                      <span style="display: block; height: 12px; width: {{ s.w }}; background: #2a78d6; border-radius: 0 4px 4px 0"></span>
-                    </span>
-                    <span style="font-weight: 600">{{ s.visits }}</span>
-                  </span>
-                </td>
-                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">{{ s.util }}</td>
-                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">{{ s.newPct }}</td>
-                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1; color: {{ s.recColor }}">{{ s.rec }}</td>
-                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">{{ s.evenings }}</td>
-              </tr>
-            </sc-for>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section aria-labelledby="h-data" style="display: flex; flex-direction: column; gap: 8px; padding: 0 4px">
-      <h2 id="h-data" style="margin: 0; font-size: 15px; font-weight: 600">Odkud čísla jsou</h2>
-      <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5; color: #3A3A42">
-        <li>Vstupenky a transakce: hlášení z prodejních systémů divadel podle klubového kódu. Platbu provádí divadlo, KMD ji jen eviduje.</li>
-        <li>Uživatelé: číselné ID, rok narození, nepovinně pohlaví a městská část / obec (ZÚJ). E-mail do analytických dat nejde.</li>
-        <li>Kontingent, scény, místa konání: z kurátorské evidence nabídek a adresáře míst.</li>
-        <li>Studium a „poprvé“: nepovinná anonymní otázka po představení, neváže se k ID uživatele.</li>
-        <li>Kanál: z jakého odkazu nebo kódu člověk poprvé přišel (pozvánka, ambasador, QR, partner, newsletter).</li>
-        <li><a href="Datovy-model.dc.html" style="font-weight: 600; text-underline-offset: 3px">Celý datový model a pravidla předávání</a></li>
-      </ul>
-    </section>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2460}}'>
-class Component extends DCLogic {
+export class Component extends Screen {
   constructor(props) {
     super(props);
     this.state = { hm: null, hf: null, table: false };
@@ -398,6 +92,300 @@ class Component extends DCLogic {
     };
   }
 }
-</script>
-</body>
-</html>
+
+export function view(v, h) {
+  return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 40px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+
+    <header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2B3BFF">Klub mladých diváků: Young adult</span>
+        <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1">Přehled návštěvnosti</h1>
+        <span style="font-size: 15px; color: #5A5A62">Pilot duben–září 2026 · aktualizováno 1. 10. 2026 · ilustrativní čísla pro prototyp</span>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center; padding: 10px 14px; border-radius: 8px; background: #FFFFFF; border: 1px solid #E2E2E6; font-size: 14px; line-height: 1.4; max-width: 380px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path></svg>
+        <span>Data bez jmen a e-mailů, lidé jen pod číselným označením. Skupiny menší než 10 lidí nezobrazujeme.</span>
+      </div>
+    </header>
+
+    <section aria-label="Klíčová čísla" style="display: flex; flex-wrap: wrap; gap: 16px">
+      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 15px; color: #5A5A62">Návštěvy přes klub</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">436</span>
+        <span style="font-size: 14px; color: #5A5A62">za 6 měsíců, 6 scén</span>
+      </div>
+      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 15px; color: #5A5A62">Noví v klubu</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">54 %</span>
+        <span style="font-size: 14px; color: #5A5A62">235 návštěv bylo prvních</span>
+      </div>
+      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 15px; color: #5A5A62">Návštěv na člena</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">2,1</span>
+        <span style="font-size: 14px; color: #5A5A62">průměr, 212 členů s návštěvou</span>
+      </div>
+      <div style="flex: 1 1 220px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 15px; color: #5A5A62">Mimo vysoké školy</span>
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; line-height: 1">48 %</span>
+        <span style="font-size: 14px; color: #5A5A62">z ankety po představení, n = 184</span>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section aria-labelledby="h-mesice" style="flex: 2 1 560px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 id="h-mesice" style="margin: 0; font-size: 18px; font-weight: 600">Noví a stávající návštěvníci po měsících</h2>
+            <span style="font-size: 14px; color: #5A5A62">Počet návštěv. „Nový“ = první návštěva s klubem.</span>
+          </div>
+          <button type="button" ${h('click', v.toggleTable)} aria-pressed="${esc(v.tablePressed)}" style="min-height: 44px; padding: 0 14px; border-radius: 6px; border: 1.5px solid #0E0E10; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #0E0E10; cursor: pointer">${esc(v.tableLabel)}</button>
+        </div>
+        <div style="display: flex; gap: 20px; font-size: 14px">
+          <span style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #2a78d6"></span>Noví</span>
+          <span style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #eb6834"></span>Stávající</span>
+        </div>
+
+        ${v.showChart ? `
+          <div aria-live="polite" style="min-height: 22px; font-size: 15px; font-weight: 500">${esc(v.monthReadout)}</div>
+          <div style="position: relative; height: 240px; display: flex; align-items: flex-end; gap: 16px; padding: 0 4px; border-bottom: 1px solid #C9C9CF">
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 100px; border-top: 1px solid #EEEEF1"></div>
+            <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 200px; border-top: 1px solid #EEEEF1"></div>
+            <span aria-hidden="true" style="position: absolute; right: 0; bottom: 204px; font-size: 14px; color: #5A5A62">130</span>
+            <span aria-hidden="true" style="position: absolute; right: 0; bottom: 104px; font-size: 14px; color: #5A5A62">65</span>
+            ${v.months.map((m) => `
+              <button type="button" aria-label="${esc(m.aria)}" ${h('mouseenter', m.enter)} ${h('focus', m.enter)} ${h('mouseleave', v.leaveMonth)} style="position: relative; flex: 1; height: 100%; max-width: 88px; padding: 0; border: 0; background: ${esc(m.hoverBg)}; border-radius: 6px 6px 0 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: 2px; cursor: default; font-family: inherit">
+                <span style="font-size: 14px; color: #3A3A42; text-align: center; padding-bottom: 4px">${esc(m.total)}</span>
+                <span style="display: block; height: ${esc(m.sh)}; background: #eb6834; border-radius: 4px 4px 0 0"></span>
+                <span style="display: block; height: ${esc(m.nh)}; background: #2a78d6"></span>
+              </button>
+            `).join('')}
+          </div>
+          <div style="display: flex; gap: 16px; padding: 0 4px">
+            ${v.months.map((m) => `
+              <span style="flex: 1; max-width: 88px; text-align: center; font-size: 14px; color: #5A5A62">${esc(m.short)}</span>
+            `).join('')}
+          </div>
+        ` : ''}
+        ${v.showTable ? `
+          <table style="width: 100%; border-collapse: collapse; font-size: 15px">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Měsíc</th>
+                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Noví</th>
+                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Stávající</th>
+                <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Celkem</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${v.months.map((m) => `
+                <tr>
+                  <th scope="row" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 500">${esc(m.full)}</th>
+                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1">${esc(m.n)}</td>
+                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1">${esc(m.s)}</td>
+                  <td style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 600">${esc(m.total)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        ` : ''}
+      </section>
+
+      <section aria-labelledby="h-frekvence" style="flex: 1 1 320px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 id="h-frekvence" style="margin: 0; font-size: 18px; font-weight: 600">Kolikrát člen přišel</h2>
+          <span style="font-size: 14px; color: #5A5A62">Počet členů podle počtu návštěv, n = 212</span>
+        </div>
+        <div aria-live="polite" style="min-height: 22px; font-size: 15px; font-weight: 500">${esc(v.freqReadout)}</div>
+        <div style="height: 240px; display: flex; align-items: flex-end; gap: 12px; border-bottom: 1px solid #C9C9CF">
+          ${v.freq.map((f) => `
+            <button type="button" aria-label="${esc(f.aria)}" ${h('mouseenter', f.enter)} ${h('focus', f.enter)} ${h('mouseleave', v.leaveFreq)} style="flex: 1; height: 100%; padding: 0; border: 0; background: ${esc(f.hoverBg)}; border-radius: 6px 6px 0 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; cursor: default; font-family: inherit">
+              <span style="font-size: 14px; color: #3A3A42; text-align: center">${esc(f.n)}</span>
+              <span style="display: block; height: ${esc(f.h)}; background: #2a78d6; border-radius: 4px 4px 0 0"></span>
+            </button>
+          `).join('')}
+        </div>
+        <div style="display: flex; gap: 12px">
+          ${v.freq.map((f) => `
+            <span style="flex: 1; text-align: center; font-size: 14px; color: #5A5A62">${esc(f.label)}</span>
+          `).join('')}
+        </div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section aria-labelledby="h-kanaly" style="flex: 3 1 480px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 id="h-kanaly" style="margin: 0; font-size: 18px; font-weight: 600">Odkud lidé přišli</h2>
+          <span style="font-size: 14px; color: #5A5A62">Podle odkazu nebo kódu při první návštěvě, n = 268 nových</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
+          ${v.channels.map((c) => `
+            <li style="display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) 48px; align-items: center; gap: 12px; min-height: 36px">
+              <span style="font-size: 15px">${esc(c.label)}</span>
+              <span aria-hidden="true" style="display: block; height: 18px; background: #F0F0F3; border-radius: 0 4px 4px 0">
+                <span style="display: block; height: 18px; width: ${esc(c.w)}; background: #2a78d6; border-radius: 0 4px 4px 0"></span>
+              </span>
+              <span style="font-size: 15px; font-weight: 600; text-align: right">${esc(c.pct)} %</span>
+            </li>
+          `).join('')}
+        </ul>
+        <span style="font-size: 14px; line-height: 1.4; color: #5A5A62">Pozvánka od kamaráda a osobní kód ambasadora dohromady přivedly víc než polovinu nových lidí.</span>
+      </section>
+
+      <section aria-labelledby="h-studium" style="flex: 2 1 360px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 id="h-studium" style="margin: 0; font-size: 18px; font-weight: 600">Kdo chodí: studium</h2>
+          <span style="font-size: 14px; color: #5A5A62">Nepovinná anonymní otázka po představení, n = 184</span>
+        </div>
+        <div aria-hidden="true" style="display: flex; gap: 2px; height: 28px">
+          <span style="width: 52%; background: #2a78d6; border-radius: 4px 0 0 4px"></span>
+          <span style="width: 33%; background: #eb6834"></span>
+          <span style="width: 15%; background: #1baf7a; border-radius: 0 4px 4px 0"></span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
+            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #2a78d6; flex-shrink: 0"></span>
+            <span style="flex-grow: 1; font-size: 15px">Studuje vysokou školu</span>
+            <span style="font-size: 15px; font-weight: 600">52 %</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #EEEEF1">
+            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #eb6834; flex-shrink: 0"></span>
+            <span style="flex-grow: 1; font-size: 15px">Nestuduje (pracuje, jiné)</span>
+            <span style="font-size: 15px; font-weight: 600">33 %</span>
+          </li>
+          <li style="display: flex; align-items: center; gap: 10px; padding: 10px 0">
+            <span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 3px; background: #1baf7a; flex-shrink: 0"></span>
+            <span style="flex-grow: 1; font-size: 15px">Jiné studium (VOŠ, kurzy)</span>
+            <span style="font-size: 15px; font-weight: 600">15 %</span>
+          </li>
+        </ul>
+        <span style="font-size: 15px; font-weight: 600">Mimo vysoké školy celkem: 48 %</span>
+      </section>
+    </div>
+
+    <section aria-labelledby="h-vstupenky" style="display: flex; flex-direction: column; gap: 12px">
+      <h2 id="h-vstupenky" style="margin: 8px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">Vstupenky a kontingent</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px">
+        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; color: #5A5A62">Využití kontingentu</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">71 %</span>
+          <span aria-hidden="true" style="display: block; height: 10px; border-radius: 0 4px 4px 0; background: #F0F0F3"><span style="display: block; width: 71%; height: 10px; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
+          <span style="font-size: 14px; color: #5A5A62">436 prodaných z 612 uvolněných do KMD</span>
+        </div>
+        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; color: #5A5A62">Zrušené a vrácené</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">18</span>
+          <span style="font-size: 14px; color: #5A5A62">4 % prodaných · 11 zrušeno, 7 s vrácením peněz</span>
+        </div>
+        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; color: #5A5A62">Sleva oproti plné ceně</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; line-height: 1">268 Kč</span>
+          <span style="font-size: 14px; color: #5A5A62">průměrně na vstupenku · plná 418 Kč, KMD 150 Kč</span>
+        </div>
+        <div style="flex: 1 1 260px; padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 15px; color: #5A5A62">Nákupy podle zařízení</span>
+          <span style="display: flex; gap: 2px; height: 24px; margin-top: 6px" aria-hidden="true">
+            <span style="width: 62%; background: #2a78d6; border-radius: 4px 0 0 4px"></span>
+            <span style="width: 38%; background: #eb6834; border-radius: 0 4px 4px 0"></span>
+          </span>
+          <span style="display: flex; gap: 16px; font-size: 14px">
+            <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #2a78d6"></span>Mobil 62 %</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 2px; background: #eb6834"></span>Web 38 %</span>
+          </span>
+          <span style="font-size: 14px; color: #5A5A62">hlásí divadla, která to umí (4 ze 6)</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-kdo" style="display: flex; flex-direction: column; gap: 12px">
+      <h2 id="h-kdo" style="margin: 8px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">Kdo jsou členové</h2>
+      <span style="font-size: 14px; color: #5A5A62">268 registrovaných · pohlaví a bydliště jsou nepovinné, proto i kategorie „neuvedeno“</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px">
+        <div style="flex: 1 1 300px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Věk</h3>
+          ${v.ages.map((a) => `
+            <div style="display: grid; grid-template-columns: 64px minmax(0, 1fr) 44px; gap: 10px; align-items: center">
+              <span style="font-size: 15px">${esc(a.label)}</span>
+              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: ${esc(a.w)}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
+              <span style="font-size: 15px; font-weight: 600; text-align: right">${esc(a.pct)}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="flex: 1 1 300px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Pohlaví</h3>
+          ${v.genders.map((g) => `
+            <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr) 80px; gap: 10px; align-items: center">
+              <span style="font-size: 15px">${esc(g.label)}</span>
+              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: ${esc(g.w)}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
+              <span style="font-size: 15px; font-weight: 600; text-align: right; color: ${esc(g.color)}">${esc(g.pct)}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="flex: 1 1 340px; min-width: 0; padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 12px">
+          <h3 style="margin: 0; font-size: 17px; font-weight: 600">Bydliště <span style="font-weight: 400; font-size: 14px; color: #5A5A62">(městská část / obec, ZÚJ)</span></h3>
+          ${v.areas.map((r) => `
+            <div style="display: grid; grid-template-columns: 110px minmax(0, 1fr) 44px; gap: 10px; align-items: center">
+              <span style="font-size: 15px">${esc(r.label)}</span>
+              <span aria-hidden="true" style="display: block; height: 16px; background: #F0F0F3; border-radius: 0 4px 4px 0"><span style="display: block; height: 16px; width: ${esc(r.w)}; background: #2a78d6; border-radius: 0 4px 4px 0"></span></span>
+              <span style="font-size: 15px; font-weight: 600; text-align: right">${esc(r.pct)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-sceny" style="padding: 24px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h2 id="h-sceny" style="margin: 0; font-size: 18px; font-weight: 600">Po scénách</h2>
+        <span style="font-size: 14px; color: #5A5A62">Seřazeno podle počtu návštěv · ilustrativní čísla, ne skutečné výsledky divadel</span>
+      </div>
+      <div style="overflow-x: auto">
+        <table style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 15px">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Scéna</th>
+              <th scope="col" style="text-align: left; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Návštěvy</th>
+              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Využití kontingentu</th>
+              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Z toho noví</th>
+              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Doporučuje</th>
+              <th scope="col" style="text-align: right; padding: 10px 8px; border-bottom: 1px solid #C9C9CF; font-weight: 600">Společné večery</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${v.scenes.map((s) => `
+              <tr>
+                <th scope="row" style="text-align: left; padding: 12px 8px; border-bottom: 1px solid #EEEEF1; font-weight: 500">${esc(s.name)}</th>
+                <td style="padding: 12px 8px; border-bottom: 1px solid #EEEEF1">
+                  <span style="display: flex; align-items: center; gap: 10px">
+                    <span aria-hidden="true" style="display: block; width: 180px; height: 12px; background: #F0F0F3; border-radius: 0 4px 4px 0">
+                      <span style="display: block; height: 12px; width: ${esc(s.w)}; background: #2a78d6; border-radius: 0 4px 4px 0"></span>
+                    </span>
+                    <span style="font-weight: 600">${esc(s.visits)}</span>
+                  </span>
+                </td>
+                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">${esc(s.util)}</td>
+                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">${esc(s.newPct)}</td>
+                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1; color: ${esc(s.recColor)}">${esc(s.rec)}</td>
+                <td style="text-align: right; padding: 12px 8px; border-bottom: 1px solid #EEEEF1">${esc(s.evenings)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-data" style="display: flex; flex-direction: column; gap: 8px; padding: 0 4px">
+      <h2 id="h-data" style="margin: 0; font-size: 15px; font-weight: 600">Odkud čísla jsou</h2>
+      <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5; color: #3A3A42">
+        <li>Vstupenky a transakce: hlášení z prodejních systémů divadel podle klubového kódu. Platbu provádí divadlo, KMD ji jen eviduje.</li>
+        <li>Uživatelé: číselné ID, rok narození, nepovinně pohlaví a městská část / obec (ZÚJ). E-mail do analytických dat nejde.</li>
+        <li>Kontingent, scény, místa konání: z kurátorské evidence nabídek a adresáře míst.</li>
+        <li>Studium a „poprvé“: nepovinná anonymní otázka po představení, neváže se k ID uživatele.</li>
+        <li>Kanál: z jakého odkazu nebo kódu člověk poprvé přišel (pozvánka, ambasador, QR, partner, newsletter).</li>
+        <li><a href="#/Datovy-model" style="font-weight: 600; text-underline-offset: 3px">Celý datový model a pravidla předávání</a></li>
+      </ul>
+    </section>
+  </div>
+</div>`;
+}

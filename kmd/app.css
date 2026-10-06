@@ -1,4 +1,4 @@
-/* Rám kolem obrazovek. Vzhled samotných obrazovek je v screens/*.dc.html. */
+/* Rám kolem obrazovek. Vzhled samotných obrazovek je v screens/*.js. */
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;

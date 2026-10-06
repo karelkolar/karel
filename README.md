@@ -53,10 +53,11 @@ Mobilní webová aplikace klubu pro diváky 19–26 let, postavená podle design
 (30 obrazovek, dva testovací scénáře, desktopové pohledy pro kurátory a město).
 Spuštění: `npm start` a otevřít `http://localhost:8080/kmd/`.
 
-- `kmd/screens/*.dc.html` – obrazovky přesně z designu (šablona + třída `Component`).
-- `kmd/runtime.js` – malý runtime bez závislostí: vykreslí šablony, hashové
-  routování (`#/Vyber`), sdílený stav členství (po otevření členské karty se
-  Výběr a Detail přepnou na pohled člena; odhlášení je v přehledu).
+- `kmd/screens/*.js` – jedna obrazovka = jeden ES modul: třída `Component`
+  (stav a data) a funkce `view` (HTML jako šablonový řetězec).
+- `kmd/core.js`, `kmd/app.js` – základ obrazovek, router a sdílený stav
+  členství (po otevření členské karty se Výběr a Detail přepnou na pohled
+  člena; odhlášení je v přehledu). Čistý JS, žádný build ani závislosti.
 - `kmd/screens.json` – seznam obrazovek a scénářů pro `#/prehled`.
 - Vstupy do scénářů: `#/A0-Plakat` (zájemkyně s plakátem) a `#/B0-Zprava`
   (nováček přes ambasadora). Desktopové pohledy: `#/Dashboard`,

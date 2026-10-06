@@ -1,0 +1,122 @@
+import { Screen, esc } from "../core.js";
+
+export const title = "Založit partu";
+export const defaults = {"accent":"#2B3BFF"};
+export const css = `body{margin:0}
+a{color:#0E0E10}a:hover{color:#2B3BFF}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
+
+export class Component extends Screen {
+  constructor(props) {
+    super(props);
+    this.state = { name: '', picked: { a: false, b: true, c: true } };
+  }
+  renderVals() {
+    const st = this.state;
+    const people = [
+      { name: 'Ty', note: 'zakladatel party', ini: 'K', av: '#0E0E10', avFg: '#FFFFFF', tag: 'člen', tagBg: '#F3F3F5', tagFg: '#0E0E10' },
+      { name: 'Jana', note: 'přijala pozvánku', ini: 'J', av: '#D7F0E4', avFg: '#0B4D37', tag: 'členka', tagBg: '#F3F3F5', tagFg: '#0E0E10' },
+      { name: 'Ondra', note: 'přijal pozvánku', ini: 'O', av: '#FFF0B8', avFg: '#5C4600', tag: 'člen', tagBg: '#F3F3F5', tagFg: '#0E0E10' },
+      { name: 'Bára', note: 'pozvánka odeslána', ini: 'B', av: '#FFD6E3', avFg: '#7A1236', tag: 'poprvé', tagBg: '#ECEEFF', tagFg: '#1F2BB8' }
+    ];
+    const defs = [
+      { id: 'a', label: 'čt 8. 10. · 19:30', note: 'společný večer klubu' },
+      { id: 'b', label: 'so 17. 10. · 19:30', note: '' },
+      { id: 'c', label: 'pá 30. 10. · 19:30', note: '' }
+    ];
+    const count = defs.filter((d) => st.picked[d.id]).length;
+    const dates = defs.map((d) => Object.assign({}, d, {
+      on: !!st.picked[d.id],
+      toggle: () => this.setState({ picked: Object.assign({}, st.picked, { [d.id]: !st.picked[d.id] }) })
+    }));
+    const ok = count >= 2;
+    return {
+      accent: this.props.accent ?? '#2B3BFF',
+      name: st.name,
+      onName: (e) => this.setState({ name: e.target.value }),
+      people,
+      dates,
+      ok,
+      notOk: !ok,
+      hint: ok ? 'Vybráno ' + count + ' z 3. Každý zahlasuje, kdy může.' : 'Vyber aspoň 2 termíny.',
+      hintColor: ok ? '#5A5A62' : '#B0351C'
+    };
+  }
+}
+
+export function view(v, h) {
+  return `<div style="width: 390px; min-height: 1300px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 8px; min-height: 64px; box-sizing: border-box">
+    <a href="#/Pozvat" aria-label="Zpět" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <span style="font-size: 15px; font-weight: 600; color: #5A5A62">Nová parta</span>
+    <span style="width: 48px"></span>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 28px; padding: 12px 20px 24px">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05; letter-spacing: -0.02em">Založ partu</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #3A3A42">Domluvte se na termínu a lístky pak koupí jeden z vás pro všechny.</p>
+    </div>
+
+    <div style="display: flex; gap: 14px; align-items: center; padding: 14px; border: 1px solid #D9D9DE; border-radius: 8px">
+      <div aria-hidden="true" style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 6px; background: #E9E9EE"></div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 700">Všichni moji bývalí</span>
+        <span style="font-size: 14px; color: #3A3A42">Divadlo v Dlouhé · 150 Kč pro členy</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <label for="nazev" style="font-size: 15px; font-weight: 600">Název party <span style="font-weight: 400; color: #5A5A62">(nepovinné)</span></label>
+      <input id="nazev" type="text" value="${esc(v.name)}" ${h('change', v.onName)} placeholder="Třeba: Sobotní sestava" style="height: 52px; box-sizing: border-box; padding: 0 16px; font-size: 17px; font-family: inherit; color: #0E0E10; border: 2px solid #0E0E10; border-radius: 6px; background: #FFFFFF">
+    </div>
+
+    <section aria-labelledby="clenove" style="display: flex; flex-direction: column; gap: 4px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <h2 id="clenove" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Kdo jde</h2>
+        <span style="font-size: 14px; font-weight: 600">4 z max. 6</span>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+        ${v.people.map((p) => `
+          <li style="display: flex; gap: 12px; align-items: center; min-height: 60px; border-bottom: 1px solid #E8E8EC">
+            <span aria-hidden="true" style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 20px; background: ${esc(p.av)}; color: ${esc(p.avFg)}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600">${esc(p.ini)}</span>
+            <span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-size: 16px; font-weight: 600">${esc(p.name)}</span>
+              <span style="font-size: 14px; color: #5A5A62">${esc(p.note)}</span>
+            </span>
+            <span style="font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: ${esc(p.tagBg)}; color: ${esc(p.tagFg)}">${esc(p.tag)}</span>
+          </li>
+        `).join('')}
+      </ul>
+      <a href="#/Pozvat" style="display: flex; align-items: center; gap: 10px; min-height: 52px; font-size: 16px; font-weight: 600; text-decoration: none">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+        Přizvat dalšího přes odkaz
+      </a>
+      <span style="font-size: 14px; color: #5A5A62">Parta má 2 až 6 lidí. Kdo není člen, jde jako doprovod za členskou cenu, poprvé za 50 Kč.</span>
+    </section>
+
+    <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 4px">
+      <legend style="padding: 0 0 8px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Termíny k hlasování (2–3)</legend>
+      ${v.dates.map((d) => `
+        <label style="display: flex; gap: 14px; align-items: center; min-height: 56px; border-bottom: 1px solid #E8E8EC; cursor: pointer">
+          <input type="checkbox" ${d.on ? 'checked' : ''} ${h('change', d.toggle)} style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: ${esc(v.accent)}">
+          <span style="flex-grow: 1; font-size: 16px; font-weight: 600">${esc(d.label)}</span>
+          <span style="font-size: 14px; color: #5A5A62">${esc(d.note)}</span>
+        </label>
+      `).join('')}
+      <span aria-live="polite" style="padding-top: 8px; font-size: 14px; color: ${esc(v.hintColor)}">${esc(v.hint)}</span>
+    </fieldset>
+  </main>
+
+  <div style="padding: 0 20px 28px">
+    ${v.ok ? `
+      <a href="#/Parta" style="display: flex; align-items: center; justify-content: center; min-height: 56px; background: #0E0E10; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; color: #FFFFFF">Spustit hlasování</a>
+    ` : ''}
+    ${v.notOk ? `
+      <span aria-disabled="true" style="display: flex; align-items: center; justify-content: center; min-height: 56px; background: #E6E6EA; border-radius: 6px; font-size: 17px; font-weight: 600; color: #5A5A62">Spustit hlasování</span>
+    ` : ''}
+  </div>
+</div>`;
+}

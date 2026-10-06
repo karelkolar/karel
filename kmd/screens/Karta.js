@@ -1,80 +1,12 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Členská karta</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Členská karta";
+export const defaults = {"accent":"#2B3BFF"};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
-  <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 0 8px; min-height: 64px; box-sizing: border-box">
-    <a href="Main.dc.html" aria-label="Zpět na úvod" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
-    </a>
-    <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px">Členská karta</h1>
-    <span style="width: 48px"></span>
-  </header>
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
 
-  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px; padding: 12px 16px 0">
-    <section aria-label="Členská karta" style="background: #0E0E10; color: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start">
-        <div style="display: flex; flex-direction: column; gap: 2px">
-          <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Klub mladých diváků</span>
-          <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #B9C0FF">Young adult</span>
-        </div>
-        <span style="padding: 6px 10px; border-radius: 999px; background: {{accent}}; font-size: 14px; font-weight: 600">Aktivní</span>
-      </div>
-
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
-        <div style="background: #FFFFFF; padding: 14px; border-radius: 10px">
-          <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); width: 200px; height: 200px">
-            <sc-for list="{{ cells }}" as="c" hint-placeholder-count="625">
-              <div style="background: {{ c.bg }}"></div>
-            </sc-for>
-          </div>
-        </div>
-        <span style="font-size: 15px; color: #D4D4DA">Ukaž u vstupu spolu s dokladem</span>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding-top: 14px; border-top: 1px solid #34343A">
-        <div style="display: flex; flex-direction: column; gap: 2px">
-          <span style="font-size: 14px; color: #B4B4BC">Členství č.</span>
-          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 500">04821</span>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 2px">
-          <span style="font-size: 14px; color: #B4B4BC">Sezóna 2026/27</span>
-          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 500">do 31. 8. 2027</span>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="kod-nadpis" style="display: flex; flex-direction: column; gap: 10px; padding: 4px 4px 0">
-      <h2 id="kod-nadpis" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Klubový kód pro nákup</h2>
-      <div style="display: flex; gap: 10px; align-items: stretch">
-        <div style="flex-grow: 1; display: flex; align-items: center; padding: 0 16px; min-height: 56px; border: 2px dashed #0E0E10; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.06em">YA-K7M4-26</div>
-        <button type="button" onClick="{{ copy }}" style="min-width: 116px; min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">{{ copyLabel }}</button>
-      </div>
-      <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #3A3A42">Zadej ho při nákupu na webu divadla. Na jeden kód koupíš lístky i pro kamarády z klubu.</p>
-    </section>
-  </main>
-
-  <div style="padding: 12px 20px 28px">
-    <a href="Vyber.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border: 2px solid #0E0E10; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; color: #0E0E10">Projít výběr na říjen</a>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2B3BFF","options":["#2B3BFF","#C8321C","#0B6E4F","#0E0E10"]},"$preview":{"width":390,"height":844}}'>
-class Component extends DCLogic {
+export class Component extends Screen {
   constructor(props) {
     super(props);
     this.state = { copied: false };
@@ -114,6 +46,62 @@ class Component extends DCLogic {
     };
   }
 }
-</script>
-</body>
-</html>
+
+export function view(v, h) {
+  return `<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 0 8px; min-height: 64px; box-sizing: border-box">
+    <a href="#/Main" aria-label="Zpět na úvod" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+    </a>
+    <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px">Členská karta</h1>
+    <span style="width: 48px"></span>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 16px; padding: 12px 16px 0">
+    <section aria-label="Členská karta" style="background: #0E0E10; color: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Klub mladých diváků</span>
+          <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #B9C0FF">Young adult</span>
+        </div>
+        <span style="padding: 6px 10px; border-radius: 999px; background: ${esc(v.accent)}; font-size: 14px; font-weight: 600">Aktivní</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+        <div style="background: #FFFFFF; padding: 14px; border-radius: 10px">
+          <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); width: 200px; height: 200px">
+            ${v.cells.map((c) => `
+              <div style="background: ${esc(c.bg)}"></div>
+            `).join('')}
+          </div>
+        </div>
+        <span style="font-size: 15px; color: #D4D4DA">Ukaž u vstupu spolu s dokladem</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding-top: 14px; border-top: 1px solid #34343A">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 14px; color: #B4B4BC">Členství č.</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 500">04821</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 14px; color: #B4B4BC">Sezóna 2026/27</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 500">do 31. 8. 2027</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="kod-nadpis" style="display: flex; flex-direction: column; gap: 10px; padding: 4px 4px 0">
+      <h2 id="kod-nadpis" style="margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Klubový kód pro nákup</h2>
+      <div style="display: flex; gap: 10px; align-items: stretch">
+        <div style="flex-grow: 1; display: flex; align-items: center; padding: 0 16px; min-height: 56px; border: 2px dashed #0E0E10; border-radius: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.06em">YA-K7M4-26</div>
+        <button type="button" ${h('click', v.copy)} style="min-width: 116px; min-height: 56px; border: 0; border-radius: 6px; background: #0E0E10; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">${esc(v.copyLabel)}</button>
+      </div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #3A3A42">Zadej ho při nákupu na webu divadla. Na jeden kód koupíš lístky i pro kamarády z klubu.</p>
+    </section>
+  </main>
+
+  <div style="padding: 12px 20px 28px">
+    <a href="#/Vyber" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border: 2px solid #0E0E10; border-radius: 6px; font-size: 17px; font-weight: 600; text-decoration: none; color: #0E0E10">Projít výběr na říjen</a>
+  </div>
+</div>`;
+}

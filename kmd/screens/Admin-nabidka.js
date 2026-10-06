@@ -1,30 +1,36 @@
-<!doctype html>
-<html lang="cs">
-<head>
-<meta charset="utf-8">
-<title>Kurátorská administrace – nová nabídka</title>
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
+import { Screen, esc } from "../core.js";
+
+export const title = "Kurátorská administrace – nová nabídka";
+export const defaults = {};
+export const css = `body{margin:0}
 a{color:#0E0E10}a:hover{color:#2B3BFF}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
-</style>
-</helmet>
-<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh; display: flex; flex-wrap: wrap">
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}`;
+
+export class Component extends Screen {
+  constructor(props) {
+    super(props);
+    this.state = { count: '16' };
+  }
+  renderVals() {
+    const n = parseInt(this.state.count, 10) || 0;
+    return {
+      count: this.state.count,
+      onCount: (e) => this.setState({ count: e.target.value }),
+      share: n > 0 ? 'z kapacity 180, tj. ' + Math.round((n / 180) * 100) + ' % sálu' : 'Zadej počet vstupenek'
+    };
+  }
+}
+
+export function view(v, h) {
+  return `<div style="background: #F6F6F8; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; min-height: 100vh; display: flex; flex-wrap: wrap">
   <nav aria-label="Administrace" style="flex: 1 1 220px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; background: #0E0E10; color: #FFFFFF; display: flex; flex-direction: column; gap: 6px">
     <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Klub mladých diváků</span>
     <span style="font-size: 14px; color: #B9C0FF; margin-bottom: 18px">Administrace kurátorů</span>
-    <a href="Admin-nabidka.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; background: #2B3BFF; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none">Nabídky a představení</a>
+    <a href="#/Admin-nabidka" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; background: #2B3BFF; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none">Nabídky a představení</a>
     <a href="#mista" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Místa konání</a>
     <a href="#organizace" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Organizace</a>
-    <a href="Dashboard.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Přehled návštěvnosti</a>
-    <a href="Datovy-model.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Export pro odbor kultury</a>
+    <a href="#/Dashboard" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Přehled návštěvnosti</a>
+    <a href="#/Datovy-model" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #FFFFFF; font-size: 15px; text-decoration: none">Export pro odbor kultury</a>
   </nav>
 
   <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px; display: flex; flex-direction: column; gap: 24px">
@@ -103,8 +109,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
           <div style="display: flex; flex-wrap: wrap; gap: 16px">
             <div style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px">
               <label for="pocet" style="font-size: 15px; font-weight: 600">Uvolněno do KMD</label>
-              <input id="pocet" type="number" min="1" value="{{ count }}" onChange="{{ onCount }}" style="height: 48px; box-sizing: border-box; padding: 0 12px; font-size: 16px; font-family: inherit; border: 1.5px solid #0E0E10; border-radius: 6px; color: #0E0E10">
-              <span style="font-size: 14px; color: #5A5A62">{{ share }}</span>
+              <input id="pocet" type="number" min="1" value="${esc(v.count)}" ${h('change', v.onCount)} style="height: 48px; box-sizing: border-box; padding: 0 12px; font-size: 16px; font-family: inherit; border: 1.5px solid #0E0E10; border-radius: 6px; color: #0E0E10">
+              <span style="font-size: 14px; color: #5A5A62">${esc(v.share)}</span>
             </div>
             <div style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px">
               <label for="plna" style="font-size: 15px; font-weight: 600">Plná cena (Kč)</label>
@@ -132,33 +138,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
           <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Náhled ve výběru</span>
           <span style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">Všichni moji bývalí</span>
           <span style="font-size: 15px; color: #3A3A42">Divadlo v Dlouhé · čt 8. 10. · 19:30</span>
-          <span style="font-size: 15px"><strong>150 Kč</strong> <span style="color: #5A5A62; text-decoration: line-through">420 Kč</span> · {{ count }} míst</span>
+          <span style="font-size: 15px"><strong>150 Kč</strong> <span style="color: #5A5A62; text-decoration: line-through">420 Kč</span> · ${esc(v.count)} míst</span>
         </div>
         <div style="padding: 20px; border-radius: 10px; background: #FFFFFF; border: 1px solid #E2E2E6; display: flex; flex-direction: column; gap: 10px">
           <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5A5A62">Ještě chybí</span>
           <span style="font-size: 15px; line-height: 1.45">„Proč jít“ od ambasadora – Tadeáš K. má text ke schválení.</span>
-          <a href="Ambasador.dc.html" style="display: flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600; text-underline-offset: 3px">Otevřít text ke schválení</a>
+          <a href="#/Ambasador" style="display: flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600; text-underline-offset: 3px">Otevřít text ke schválení</a>
         </div>
       </aside>
     </div>
   </main>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1120}}'>
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.state = { count: '16' };
-  }
-  renderVals() {
-    const n = parseInt(this.state.count, 10) || 0;
-    return {
-      count: this.state.count,
-      onCount: (e) => this.setState({ count: e.target.value }),
-      share: n > 0 ? 'z kapacity 180, tj. ' + Math.round((n / 180) * 100) + ' % sálu' : 'Zadej počet vstupenek'
-    };
-  }
+</div>`;
 }
-</script>
-</body>
-</html>
