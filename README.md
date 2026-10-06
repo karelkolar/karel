@@ -44,3 +44,23 @@ zorného pole se recyklují zpět nad kuličku — proto je pád nekonečný bez
 ztráty přesnosti souřadnic. Kamera je sférická, ovládaná pointer/wheel
 eventy s doztlumením (damping) a pomalým samovolným driftem, když uživatel
 nezasahuje.
+
+---
+
+# Klub mladých diváků – Young adult (`kmd/`)
+
+Mobilní webová aplikace klubu pro diváky 19–26 let, postavená podle designu
+(30 obrazovek, dva testovací scénáře, desktopové pohledy pro kurátory a město).
+Spuštění: `npm start` a otevřít `http://localhost:8080/kmd/`.
+
+- `kmd/screens/*.dc.html` – obrazovky přesně z designu (šablona + třída `Component`).
+- `kmd/runtime.js` – malý runtime bez závislostí: vykreslí šablony, hashové
+  routování (`#/Vyber`), sdílený stav členství (po otevření členské karty se
+  Výběr a Detail přepnou na pohled člena; odhlášení je v přehledu).
+- `kmd/screens.json` – seznam obrazovek a scénářů pro `#/prehled`.
+- Vstupy do scénářů: `#/A0-Plakat` (zájemkyně s plakátem) a `#/B0-Zprava`
+  (nováček přes ambasadora). Desktopové pohledy: `#/Dashboard`,
+  `#/Admin-nabidka`, `#/Datovy-model`.
+
+Data jsou zatím ilustrativní (stejná jako v designu), bez serveru; prodej
+lístků a export dat pro město jsou v designu popsané, ale backend zde není.

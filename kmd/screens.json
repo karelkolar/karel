@@ -1,0 +1,185 @@
+{
+  "title": "Klub mladých diváků: Young adult",
+  "screens": {
+    "Main": {
+      "title": "1 Úvod",
+      "group": "Vstup a registrace",
+      "fill": false
+    },
+    "Registrace-email": {
+      "title": "2a Registrace – e-mail",
+      "group": "Vstup a registrace",
+      "fill": false
+    },
+    "Registrace-vek": {
+      "title": "2b Registrace – rok narození",
+      "group": "Vstup a registrace",
+      "fill": false
+    },
+    "Registrace-souhlasy": {
+      "title": "2c Registrace – souhlasy",
+      "group": "Vstup a registrace",
+      "fill": false
+    },
+    "Karta": {
+      "title": "3 Členská karta",
+      "group": "Vstup a registrace",
+      "fill": false
+    },
+    "Vyber": {
+      "title": "4 Výběr měsíce (celá délka)",
+      "group": "Výběr a detail",
+      "fill": false
+    },
+    "Detail": {
+      "title": "5 Detail představení (celá délka)",
+      "group": "Výběr a detail",
+      "fill": false
+    },
+    "Prechod": {
+      "title": "6 Přechod do prodeje divadla",
+      "group": "Výběr a detail",
+      "fill": false
+    },
+    "Vecery": {
+      "title": "7 Společné večery (celá délka)",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "Pozvat": {
+      "title": "8a Pozvi kamaráda – odesílatel",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "Pozvanka": {
+      "title": "8b Pozvánka – co vidí kamarád",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "Parta-nova": {
+      "title": "9a Parta – založení",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "Parta": {
+      "title": "9b Parta – hlasování o termínu",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "Parta-nakup": {
+      "title": "9c Parta – nákup na jeden kód",
+      "group": "Večery, pozvi kamaráda a parta",
+      "fill": false
+    },
+    "LM-notifikace": {
+      "title": "10a Last-minute – upozornění",
+      "group": "Last-minute pro členy",
+      "fill": false
+    },
+    "LM": {
+      "title": "10b Last-minute – nabídka (člen)",
+      "group": "Last-minute pro členy",
+      "fill": false
+    },
+    "LM-konec": {
+      "title": "10c Last-minute – skončila / dnes nic",
+      "group": "Last-minute pro členy",
+      "fill": false
+    },
+    "LM-host": {
+      "title": "10d Last-minute – nepřihlášený",
+      "group": "Last-minute pro členy",
+      "fill": false
+    },
+    "Hodnoceni": {
+      "title": "11a Den po představení – otázka",
+      "group": "Po představení a ambasador",
+      "fill": false
+    },
+    "Hodnoceni-diky": {
+      "title": "11b Díky + další večer",
+      "group": "Po představení a ambasador",
+      "fill": false
+    },
+    "Ambasador": {
+      "title": "12 Profil ambasadora (vlastní pohled)",
+      "group": "Po představení a ambasador",
+      "fill": false
+    },
+    "A0-Plakat": {
+      "title": "A0 Start scénáře A – plakát s QR",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "Prodej-mezikrok": {
+      "title": "A· Testovací krok – web divadla",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "Hodnoceni-notifikace": {
+      "title": "A· Upozornění den poté",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "B0-Zprava": {
+      "title": "B0 Start scénáře B – zpráva od kamaráda",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "Host-vecer": {
+      "title": "B· Doprovodná vstupenka + společný večer",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "Host-po": {
+      "title": "B· Po představení + nabídka členství",
+      "group": "Doplňky pro testovací scénáře",
+      "fill": false
+    },
+    "Dashboard": {
+      "title": "13 Dashboard návštěvnosti (desktop)",
+      "group": "Data, administrace a export pro město",
+      "fill": true
+    },
+    "Admin-nabidka": {
+      "title": "14 Kurátorská administrace – nová nabídka",
+      "group": "Data, administrace a export pro město",
+      "fill": true
+    },
+    "Datovy-model": {
+      "title": "15 Datový model pro odbor kultury",
+      "group": "Data, administrace a export pro město",
+      "fill": true
+    }
+  },
+  "scenarios": [
+    {
+      "title": "SCÉNÁŘ A – Zájemkyně",
+      "start": "A0 Plakát s QR (Play)",
+      "steps": [
+        "1. Plakát → Úvod",
+        "2. Stát se členem → e-mail → rok narození → souhlasy",
+        "3. Členská karta → Projít výběr na říjen",
+        "4. Výběr → karta „Všichni moji bývalí“",
+        "5. Detail → Pozvat kamaráda",
+        "6. Poslat odkaz → Koupit 2 lístky s kódem",
+        "7. Přechod do prodeje → testovací krok → upozornění den poté",
+        "8. Hodnocení → Díky + další večer"
+      ],
+      "entry": "A0-Plakat"
+    },
+    {
+      "title": "SCÉNÁŘ B – Nováček přes ambasadora",
+      "start": "B0 Zpráva od kamaráda (Play)",
+      "steps": [
+        "1. Zpráva → Pozvánka (bez účtu)",
+        "2. Jdu → Co tě ve čtvrtek čeká",
+        "3. Doprovodná vstupenka + společný večer s Tadeášem",
+        "4. Testovací krok → den po představení",
+        "5. Doporučil/a bys to? → Odeslat",
+        "6. Nabídka „Chceš chodit dál?“ → Stát se členem → registrace"
+      ],
+      "entry": "B0-Zprava"
+    }
+  ]
+}

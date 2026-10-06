@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Díky za hodnocení</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E0E10}a:hover{color:#2B3BFF}
+a:focus-visible,button:focus-visible{outline:3px solid #2B3BFF;outline-offset:2px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; color: #0E0E10; font-family: 'Instrument Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <header style="display: flex; align-items: center; justify-content: flex-end; padding: 8px; min-height: 64px; box-sizing: border-box">
+    <a href="Vyber.dc.html" aria-label="Zavřít" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; color: #0E0E10">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </a>
+  </header>
+
+  <main style="flex-grow: 1; display: flex; flex-direction: column; gap: 28px; padding: 8px 20px 0">
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em">Díky.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.45">Tvoje odpověď se přidá k ostatním. Podle nich kurátoři skládají další výběr a ostatní vidí, jestli se tam vyplatí jít.</p>
+    </div>
+
+    <section aria-labelledby="dalsi" style="padding: 20px; border-radius: 8px; background: {{accent}}; color: #FFFFFF; display: flex; flex-direction: column; gap: 14px">
+      <span id="dalsi" style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em">Další společný večer</span>
+      <span style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.1">Tma pod hladinou</span>
+        <span style="font-size: 15px; line-height: 1.4">so 10. 10. · 20:00 · Studio Ypsilon<br>Vede Nela P. · potom posezení poblíž</span>
+      </span>
+      <span style="font-size: 15px">7 přihlášených · zbývá 5 míst</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <a href="Vecery.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 6px; background: #FFFFFF; color: #0E0E10; font-size: 16px; font-weight: 600; text-decoration: none">Přijdu</a>
+        <a href="Vecery.dc.html" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 52px; border-radius: 6px; border: 2px solid #FFFFFF; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none">Přijdu s kamarádem</a>
+      </div>
+    </section>
+
+    <a href="Vecery.dc.html" style="display: flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 600; text-underline-offset: 4px">Všechny společné večery</a>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2B3BFF","options":["#2B3BFF","#C8321C","#0B6E4F","#0E0E10"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#2B3BFF' };
+  }
+}
+</script>
+</body>
+</html>
